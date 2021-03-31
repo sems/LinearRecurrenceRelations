@@ -2,6 +2,11 @@ var now = require("performance-now")
 
 let letters = ['A', 'B', 'C', 'D']
 
+/**
+ * 
+ * @param {interger} n 
+ * @returns amount of possibilities with performance message
+ */
 function check(n) {
   if (n < 1) return;
   console.log("When N is", n);
@@ -14,11 +19,16 @@ function check(n) {
   }
 
   let t1 = now() 
-
-  let calucationMessage = ((t1-t0)/1000).toFixed(2) == "0.00" ? "less then a second." : ((t1-t0)/1000).toFixed(2) + " seconds."
-  console.log("There are", array.length,"correct outcomes. Calculated in", calucationMessage, "\n");
+  let performanceMessage = ((t1-t0)/1000).toFixed(2) == "0.00" ? "less then a second." : ((t1-t0)/1000).toFixed(2) + " seconds."
+  console.log("There are", array.length,"correct outcomes. Calculated in", performanceMessage, "\n");
 }
 
+/**
+ * Will make a new set from a given previous set (array), by increasing the a[n] by one, 
+ * where the new set only consits of possible outcomes.
+ * @param {array} arrays 
+ * @returns {array} which contains only sets which are possible in this RR
+ */
 function getNewSet(arrays) {
   let newArr = []
   arrays.forEach(rightArray => {
@@ -34,6 +44,11 @@ function getNewSet(arrays) {
   return newArr
 }
 
+/**
+ * Checks if a 'A' is present after an 'B'.
+ * @param {array} array 
+ * @returns {boolean} 
+ */
 function checkIfAIsAfterB(array) {
   if(Array.isArray(array) && array.includes('B')) {
     let indexOfB = array.indexOf('B')
@@ -47,4 +62,4 @@ check(1)
 check(2)
 check(3)
 check(4)
-check(10)
+check(13)
