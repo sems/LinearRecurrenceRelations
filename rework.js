@@ -1,34 +1,25 @@
 let letters = ['A', 'B', 'C', 'D']
 
-function single() {
-  let counter = 0
-
-  letters.forEach(letter => {
-    counter++
-  });
-  console.log(counter)
-}
-
-let stillPossible = []
-
 function check(n) {
+  console.log("When N is", n);
+
   let check = 1
   let array = letters
-  console.log(array);
   while (check < n) {
-    array = getNewSet(array)
     check ++
+    array = getNewSet(array)
   }
-
-  console.log("N:", n);
-  console.log(array.length);
+  
+  console.log("There are", array.length,"correct outcomes.");
 }
 
 function getNewSet(arrays) {
   let newArr = []
   arrays.forEach(rightArray => {
     letters.forEach(letter => {
-      let combination = [rightArray, letter]
+      combination = Array.isArray(rightArray) ? rightArray.concat(letter) : [rightArray, letter]
+      // // For debugging
+      // console.log("->", typeof combination, combination);
       if (checkIfAIsAfterB(combination)) {
         newArr.push(combination)
       } 
@@ -38,15 +29,15 @@ function getNewSet(arrays) {
 }
 
 function checkIfAIsAfterB(array) {
-  if(array.includes('B')) {
+  if(Array.isArray(array) && array.includes('B')) {
     let indexOfB = array.indexOf('B')
     let newArr = array.slice(indexOfB)
-    if (newArr.includes('A')) {
-      return false
-    } 
-    return true
+    return newArr.includes('A') ? false : true
   }
   return true
 }
 
-check(5)
+check(1)
+check(2)
+check(3)
+check(4)
