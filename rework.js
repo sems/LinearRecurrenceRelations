@@ -3,7 +3,7 @@ var now = require("performance-now")
 let letters = ['A', 'B', 'C', 'D']
 
 /**
- * 
+ * Calculates the possible outcome of the RR when the length is a[n]
  * @param {interger} n 
  * @returns amount of possibilities with performance message
  */
