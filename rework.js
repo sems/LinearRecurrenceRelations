@@ -1,16 +1,22 @@
+var now = require("performance-now")
+
 let letters = ['A', 'B', 'C', 'D']
 
 function check(n) {
+  if (n < 1) return;
   console.log("When N is", n);
-
+  let t0 = now() 
   let check = 1
   let array = letters
   while (check < n) {
     check ++
     array = getNewSet(array)
   }
-  
-  console.log("There are", array.length,"correct outcomes.");
+
+  let t1 = now() 
+
+  let calucationMessage = ((t1-t0)/1000).toFixed(2) == "0.00" ? "less then a second." : ((t1-t0)/1000).toFixed(2) + " seconds."
+  console.log("There are", array.length,"correct outcomes. Calculated in", calucationMessage, "\n");
 }
 
 function getNewSet(arrays) {
@@ -19,7 +25,7 @@ function getNewSet(arrays) {
     letters.forEach(letter => {
       combination = Array.isArray(rightArray) ? rightArray.concat(letter) : [rightArray, letter]
       // // For debugging
-      // console.log("->", typeof combination, combination);
+      // console.log("->", combination);
       if (checkIfAIsAfterB(combination)) {
         newArr.push(combination)
       } 
@@ -41,3 +47,4 @@ check(1)
 check(2)
 check(3)
 check(4)
+check(10)
